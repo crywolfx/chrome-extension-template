@@ -1,5 +1,3 @@
-'use strict';
-
 const createRender = (paths) => paths.map((item, index) => `
   const contentModule${index} = require('${item}');
   if (contentModule${index}) {
@@ -13,8 +11,7 @@ const createRender = (paths) => paths.map((item, index) => `
   }
 `).join('\n')
 
-module.exports = (path) => {
-  const paths = Array.isArray(path) ? path : [path];
+const baseTpl = () => {
   return `
   import React from 'react';
   import ReactDOM from 'react-dom/client';
@@ -31,8 +28,8 @@ module.exports = (path) => {
       );
     }
   };
-  const mount = (Component, shadow, style = '') => {
-    let styleEl;
+  const mount = (Component: any, shadow: any, style = '') => {
+    let styleEl: any;
     if (style) {
       styleEl = document.createElement('style');
       styleEl.textContent = style;
@@ -52,7 +49,13 @@ module.exports = (path) => {
       shadowRoot.append($container);
       document.documentElement.appendChild(shadowContainer); 
     }
-  }
+  }`
+}
+
+module.exports = (path) => {
+  const paths = Array.isArray(path) ? path : [path];
+  return paths.length ? `
+  ${baseTpl()}
   ${createRender(paths)}
-  `
+  ` : '';
 }

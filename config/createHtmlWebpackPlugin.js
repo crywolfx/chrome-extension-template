@@ -1,4 +1,3 @@
-'use strict';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const entryInfo = require('./entry');
 const paths = require('./paths');

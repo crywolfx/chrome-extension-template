@@ -1,4 +1,4 @@
-'use strict';
+
 
 const path = require('path');
 const fs = require('fs');
@@ -63,6 +63,7 @@ module.exports = {
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   newContentSrc: resolveApp('config/content/files'),
+  reloadSrc: resolveApp('config/reload/index'),
   popupSrc: resolveApp('src/popup'),
   optionsSrc: resolveApp('src/options'),
   devToolSrc: resolveApp('src/devtool'),

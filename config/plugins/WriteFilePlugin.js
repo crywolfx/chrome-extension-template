@@ -1,5 +1,3 @@
-'use strict';
-
 class WriteFilePlugin {
   static defaultOptions = {
     outputFile: 'file.text',

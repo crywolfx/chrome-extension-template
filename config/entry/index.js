@@ -1,4 +1,3 @@
-'use strict';
 const {
   optionsEntry,
   popupEntry,
@@ -7,13 +6,14 @@ const {
   contentEntry,
   ...others
 } = require('./base');
-const createContentEntry = require('../content/resolve');
+const { generateContentFile } = require('../content/generate');
+const { resolveApp } = require('../paths');
 
 const entry = {};
 popupEntry.length && (entry.popup = popupEntry);
 devToolEntry.length && (entry.devtool = devToolEntry);
 optionsEntry.length && (entry.options = optionsEntry);
-backgroundEntry.length && (entry.background = backgroundEntry);
-contentEntry.length && (entry.content = createContentEntry(contentEntry));
+backgroundEntry.length && (entry.background = [...backgroundEntry, resolveApp('config/reload/index.js')]);
+contentEntry.length && (entry.content = [generateContentFile(contentEntry)]);
 
 module.exports = { ...others, entry };

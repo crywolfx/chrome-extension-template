@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const paths = require('../paths');
 
@@ -13,8 +11,7 @@ const getEntry = (path) => {
 const [hasOptions, hasPopup, hasDevTool, hasBackground, hasContent] = dataPaths.map((p) => fs.existsSync(p));
 const [optionsEntry, popupEntry, devToolEntry, backgroundEntry, contentEntry] = dataPaths.map((p) => getEntry(p));
 
-
-module.exports = {
+const entry = {
   hasOptions,
   hasPopup,
   hasDevTool,
@@ -25,4 +22,7 @@ module.exports = {
   devToolEntry,
   backgroundEntry,
   contentEntry
-}
+};
+
+module.exports = entry;
+module.exports.getEntry = getEntry;

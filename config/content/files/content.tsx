@@ -1,4 +1,5 @@
 
+  
   import React from 'react';
   import ReactDOM from 'react-dom/client';
   const render = (props: any) => {
@@ -14,8 +15,8 @@
       );
     }
   };
-  const mount = (Component, shadow, style = '') => {
-    let styleEl;
+  const mount = (Component: any, shadow: any, style = '') => {
+    let styleEl: any;
     if (style) {
       styleEl = document.createElement('style');
       styleEl.textContent = style;
@@ -37,23 +38,11 @@
     }
   }
   
-  const contentModule0 = require('/Users/moonlittt/kShou/chrome-extension-template/src/content/test');
+  const contentModule0 = require('/Users/moonlittt/kShou/chrome-extension-template/src/content/test2');
   if (contentModule0) {
     const config = contentModule0.config || {};
     const Component = contentModule0.default;
     const style = contentModule0.style;
-    const shadow = config.shadow === undefined ? true : config.shadow;
-    if (config.component) {
-      mount(Component, shadow, style)
-    }
-  }
-
-
-  const contentModule1 = require('/Users/moonlittt/kShou/chrome-extension-template/src/content/test2');
-  if (contentModule1) {
-    const config = contentModule1.config || {};
-    const Component = contentModule1.default;
-    const style = contentModule1.style;
     const shadow = config.shadow === undefined ? true : config.shadow;
     if (config.component) {
       mount(Component, shadow, style)

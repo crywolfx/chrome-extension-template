@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
@@ -66,9 +64,6 @@ const useTailwind = fs.existsSync(
   path.join(paths.appPath, 'tailwind.config.js')
 );
 
-// Get the path to the uncompiled service worker (if it exists).
-const swSrc = paths.swSrc;
-
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -116,7 +111,7 @@ module.exports = function (webpackEnv) {
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
-      isEnvDevelopment && require.resolve('style-loader'),
+      // isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
         loader: MiniCssExtractPlugin.loader,
         // css is located in `static/css`, use '../../' to locate index.html folder
@@ -417,7 +412,7 @@ module.exports = function (webpackEnv) {
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: [paths.appSrc, paths.newContentSrc],
+              include: [paths.appSrc, paths.newContentSrc, paths.reloadSrc],
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(
