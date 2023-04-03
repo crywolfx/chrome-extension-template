@@ -16,24 +16,22 @@
     }
   };
   const mount = (Component: any, shadow: any) => {
-    let styleEl: any;
-    const style = require('/Users/moonlittt/kShou/chrome-extension-template/build/static/css/content/index.css?toString').default;
-    if (style && style !== '[object Object]') {
-      styleEl = document.createElement('style');
-      styleEl.textContent = style.toString();
-    }
+    const styleEl = document.createElement('link')
+    const href = chrome.runtime.getURL('static/css/content/index.css');
+    styleEl.setAttribute('rel', 'stylesheet')
+    styleEl.setAttribute('href', href);
     if (!shadow) {
       const $container = document.createElement('div');
       render({ container: $container, Component });
       document.documentElement.appendChild($container);
-      styleEl && document.head.appendChild(styleEl);
+      document.head.appendChild(styleEl);
     } else {
       const shadowContainer = document.createElement('div');
       const shadowConfig = Object.prototype.toString.call(shadow) === '[object Object]' ? shadow : { mode: 'open' };
       const shadowRoot = shadowContainer.attachShadow(shadowConfig);
       const $container = document.createElement('div');
       render({ container: $container, Component });
-      styleEl && shadowRoot.append(styleEl);
+      shadowRoot.append(styleEl);
       shadowRoot.append($container);
       document.documentElement.appendChild(shadowContainer);
     }

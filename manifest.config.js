@@ -36,10 +36,9 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
     web_accessible_resources: [
       {
         matches: ['<all_urls>'],
-        resources: [],
+        resources: ['static/css/content/index.css'],
       },
     ],
-    host_permissions: ["<all_urls>"]
   };
 
   if (!isHot || isProduction) {
