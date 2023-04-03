@@ -10,7 +10,7 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
     description: 'chrome extension template',
     host_permissions: ['<all_urls>'],
     manifest_version: 3,
-    name: 'tpl',
+    name: isProduction ? 'chrome-extension-template' : '[development]chrome-extension-template',
     offline_enabled: false,
     options_page: 'options.html',
     permissions: [

@@ -20,8 +20,9 @@ const publicUrlOrPath = getPublicUrlOrPath(
   require(resolveApp('package.json')).homepage,
   process.env.PUBLIC_URL
 );
+const baseBuildPath = process.env.NODE_ENV === 'development' ? 'build/development' : 'build/production';
 
-const buildPath = process.env.BUILD_PATH || 'build';
+const buildPath = process.env.BUILD_PATH || baseBuildPath;
 
 const moduleFileExtensions = [
   'web.mjs',

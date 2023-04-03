@@ -51,6 +51,7 @@ const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
 const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
+const isProduction = process.env.NODE_ENV === 'production';
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
@@ -88,7 +89,7 @@ const hasJsxRuntime = (() => {
 const isFunction = (val) => Object.prototype.toString.call(val) === '[object Function]';
 
 const manifestConfigData = isFunction(manifestConfig)
-  ? manifestConfig({ version: packageVersion, isProduction: true, isHot: false })
+  ? manifestConfig({ version: packageVersion, isProduction, isHot: false })
   : manifestConfig;
 
 // This is the production and development configuration.

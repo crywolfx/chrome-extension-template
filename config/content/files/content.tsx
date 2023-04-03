@@ -41,7 +41,6 @@
   if (contentModule0) {
     const config = contentModule0.config || {};
     const Component = contentModule0.default;
-    const style = contentModule0.style;
     const shadow = config.shadow === undefined ? true : config.shadow;
     if (config.component) {
       mount(Component, shadow)
@@ -53,7 +52,6 @@
   if (contentModule1) {
     const config = contentModule1.config || {};
     const Component = contentModule1.default;
-    const style = contentModule1.style;
     const shadow = config.shadow === undefined ? true : config.shadow;
     if (config.component) {
       mount(Component, shadow)
