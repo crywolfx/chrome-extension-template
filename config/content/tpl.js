@@ -6,12 +6,12 @@ const createRender = (paths) => paths.map((item, index) => `
     const style = contentModule${index}.style;
     const shadow = config.shadow === undefined ? true : config.shadow;
     if (config.component) {
-      mount(Component, shadow, style)
+      mount(Component, shadow)
     }
   }
 `).join('\n')
 
-const baseTpl = () => {
+const baseTpl = (stylePath) => {
   return `
   import React from 'react';
   import ReactDOM from 'react-dom/client';
@@ -28,34 +28,35 @@ const baseTpl = () => {
       );
     }
   };
-  const mount = (Component: any, shadow: any, style = '') => {
+  const mount = (Component: any, shadow: any) => {
     let styleEl: any;
-    if (style) {
+    const style = require('${stylePath}?toString').default;
+    if (style && style !== '[object Object]') {
       styleEl = document.createElement('style');
-      styleEl.textContent = style;
+      styleEl.textContent = style.toString();
     }
     if (!shadow) {
       const $container = document.createElement('div');
       render({ container: $container, Component });
-      document.documentElement.appendChild($container); 
+      document.documentElement.appendChild($container);
       styleEl && document.head.appendChild(styleEl);
     } else {
       const shadowContainer = document.createElement('div');
-      const shadowConfig = Object.prototype.toString.call(shadow) === '[object Object]' ? shadow : { mode: 'open'};
+      const shadowConfig = Object.prototype.toString.call(shadow) === '[object Object]' ? shadow : { mode: 'open' };
       const shadowRoot = shadowContainer.attachShadow(shadowConfig);
       const $container = document.createElement('div');
       render({ container: $container, Component });
-      shadowRoot.append(styleEl);
+      styleEl && shadowRoot.append(styleEl);
       shadowRoot.append($container);
-      document.documentElement.appendChild(shadowContainer); 
+      document.documentElement.appendChild(shadowContainer);
     }
   }`
 }
 
-module.exports = (path) => {
+module.exports = (path, stylePath) => {
   const paths = Array.isArray(path) ? path : [path];
   return paths.length ? `
-  ${baseTpl()}
+  ${baseTpl(stylePath)}
   ${createRender(paths)}
   ` : '';
 }

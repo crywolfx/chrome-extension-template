@@ -1,4 +1,4 @@
-import style from './test2.module.less';
+import style from './test1.module.less';
 
 export const config = {
   component: true,
@@ -7,7 +7,7 @@ export const config = {
 
 
 const App = () => {
-  return <div className={style.test}>test2</div>
+  return <div className={style.test}>test1</div>
 }
 
 export default App
