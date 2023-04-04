@@ -8,6 +8,7 @@
     "test": "node scripts/test.js"
   },
   "dependencies": {
+    "chrome-extension-core": "^0.1.4",
     "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",

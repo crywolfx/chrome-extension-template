@@ -72,6 +72,7 @@ checkBrowsers(paths.appPath, isInteractive)
       // We have not found a port.
       return;
     }
+    process.env.PORT = port;
     fs.emptyDirSync(paths.appBuild);
     // Merge with the public folder
     copyPublicFolder();
