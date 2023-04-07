@@ -64,7 +64,7 @@ module.exports = {
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   newContentSrc: resolveApp('config/content/files'),
-  reloadSrc: resolveApp('config/reload/index'),
+  reloadSrc: resolveApp('config/reload'),
   popupSrc: resolveApp('src/popup'),
   optionsSrc: resolveApp('src/options'),
   devToolSrc: resolveApp('src/devtool'),

@@ -11,7 +11,7 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
     host_permissions: ['<all_urls>'],
     manifest_version: 3,
     name: isProduction ? 'chrome-extension-template' : '[development]chrome-extension-template',
-    offline_enabled: false,
+    offline_enabled: true,
     options_page: 'options.html',
     permissions: [
       'tabs',
@@ -24,14 +24,14 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
       'contextMenus',
       enableInspectHeader && 'declarativeNetRequest',
     ].filter(Boolean),
-    // content_scripts: [
-    //   {
-    //     matches: ['<all_urls>'],
-    //     css: [],
-    //     js: ['content/content.js'],
-    //     run_at: 'document_end',
-    //   },
-    // ],
+    content_scripts: [
+      {
+        matches: ['<all_urls>'],
+        css: [],
+        js: ['content/content.js'],
+        run_at: 'document_end',
+      },
+    ],
     version: version,
     web_accessible_resources: [
       {

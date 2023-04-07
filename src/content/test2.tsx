@@ -7,7 +7,7 @@ export const config = {
 
 
 const App = () => {
-  return <div className={style.test}>test2</div>
+  return <div className={style.test}>www</div>
 }
 
 export default App

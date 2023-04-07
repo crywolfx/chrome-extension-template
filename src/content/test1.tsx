@@ -5,10 +5,8 @@ export const config = {
   shadow: true,
 }
 
-console.log(process.env)
-
 const App = () => {
-  return <div className={style.test}>dadasdasdsa</div>
+  return <div className={style.test}>dasdasdasdas</div>
 }
 
 export default App

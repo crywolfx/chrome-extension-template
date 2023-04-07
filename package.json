@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "build": "node scripts/build.js"
   },
   "dependencies": {
     "chrome-extension-core": "^0.1.4",
@@ -24,6 +23,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/chrome": "^0.0.197",
     "@types/jest": "^27.5.2",
+    "@types/lodash.debounce": "^4.0.7",
     "@types/node": "^16.11.65",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
