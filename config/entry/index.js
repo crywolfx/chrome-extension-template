@@ -15,7 +15,11 @@ const entry = {};
 popupEntry.length && (entry.popup = popupEntry);
 devToolEntry.length && (entry.devtool = devToolEntry);
 optionsEntry.length && (entry.options = optionsEntry);
-backgroundEntry.length && (entry.background = [...backgroundEntry, !isProduction && resolveApp('config/reload/background.ts')].filter(Boolean));
-contentEntry.length && (entry.content = [generateContentFile(contentEntry), !isProduction && resolveApp('config/reload/content.ts')].filter(Boolean));
+backgroundEntry.length && (entry.background = [...backgroundEntry].filter(Boolean));
+contentEntry.length && (entry.content = [generateContentFile(contentEntry)].filter(Boolean));
+if (!isProduction) {
+  entry.hotContent = resolveApp('config/reload/content.ts');
+  entry.hotBackground = resolveApp('config/reload/background.ts');
+}
 
 module.exports = { ...others, entry };

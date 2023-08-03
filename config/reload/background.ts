@@ -14,16 +14,24 @@ const onMessage = async (data: any) => {
   } catch (error) {
     
   }
-  if (dataInfo.type === 'ok' || dataInfo.type === 'still-ok') {
+  if (
+    dataInfo.type === 'ok' ||
+    dataInfo.type === 'still-ok' ||
+    dataInfo.type === 'warnings' ||
+    dataInfo.type === 'errors'
+  ) {
     if (!isReady) {
-      hotLog(`first load`)
+      hotLog(`first load`);
       isReady = true;
       return;
     }
     hotLog('start refresh');
     try {
-      const tabInfo = await getTab({ active: true }); 
-      await hotReloadEvent.emit('chromeHotReload', true, { type: 'tab', id: tabInfo?.id });
+      const tabInfo = await getTab({ active: true });
+      await hotReloadEvent.emit('chromeHotReload', true, {
+        type: 'tab',
+        id: tabInfo?.id,
+      });
     } catch (error: any) {
       hotLog(error?.message || 'message error');
     } finally {

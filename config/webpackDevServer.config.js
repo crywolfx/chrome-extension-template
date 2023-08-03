@@ -37,7 +37,7 @@ module.exports = function (proxy, allowedHost) {
         pathname: sockPath,
       },
       overlay: {
-        errors: true,
+        errors: false,
         warnings: false,
       },
     },

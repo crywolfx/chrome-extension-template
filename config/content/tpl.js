@@ -1,13 +1,19 @@
 const createRender = (paths) => paths.map((item, index) => `
-  const contentModule${index} = require('${item}');
-  if (contentModule${index}) {
-    const config = contentModule${index}.config || {};
-    const Component = contentModule${index}.default;
-    const shadow = config.shadow === undefined ? true : config.shadow;
-    if (config.component) {
-      mount(Component, shadow)
-    }
+  (() => {
+    try {
+    const contentModule${index} = require('${item}');
+    if (contentModule${index}) {
+      const config = contentModule${index}.config || {};
+      const Component = contentModule${index}.default;
+      const shadow = config.shadow === undefined ? true : config.shadow;
+      if (config.component) {
+        mount(Component, shadow)
+      }
+    } 
+  } catch (error) {
+    console.error(error);
   }
+  })();
 `).join('\n')
 
 const baseTpl = (stylePath) => {

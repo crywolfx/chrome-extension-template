@@ -28,6 +28,7 @@ const createHtmlWebpackPlugin = require('./createHtmlWebpackPlugin');
 const packageVersion = require('../package.json').version;
 const WriteFilePlugin = require('./plugins/WriteFilePlugin');
 const manifestConfig = require('../manifest.config');
+const backgroundTplConfig = require('./background');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
@@ -52,6 +53,7 @@ const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
 const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
 const isProduction = process.env.NODE_ENV === 'production';
+const isHot = !isProduction && process.env.HOT === 'true';
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
@@ -89,8 +91,9 @@ const hasJsxRuntime = (() => {
 const isFunction = (val) => Object.prototype.toString.call(val) === '[object Function]';
 
 const manifestConfigData = isFunction(manifestConfig)
-  ? manifestConfig({ version: packageVersion, isProduction, isHot: false })
+  ? manifestConfig({ version: packageVersion, isProduction, isHot })
   : manifestConfig;
+const backgroundTpl = backgroundTplConfig(isHot);
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -628,6 +631,10 @@ module.exports = function (webpackEnv) {
       new WriteFilePlugin({
         outputFile: 'manifest.json',
         content: JSON.stringify(manifestConfigData, null, 4),
+      }),
+      new WriteFilePlugin({
+        outputFile: 'bg.js',
+        content: backgroundTpl,
       }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize

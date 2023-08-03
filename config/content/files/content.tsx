@@ -37,25 +37,37 @@
     }
   }
   
-  const contentModule0 = require('/Users/moonlittt/kShou/chrome-extension-template/src/content/test1');
-  if (contentModule0) {
-    const config = contentModule0.config || {};
-    const Component = contentModule0.default;
-    const shadow = config.shadow === undefined ? true : config.shadow;
-    if (config.component) {
-      mount(Component, shadow)
-    }
+  (() => {
+    try {
+    const contentModule0 = require('/Users/moonlittt/Ks/chrome-extension-template/src/content/test1');
+    if (contentModule0) {
+      const config = contentModule0.config || {};
+      const Component = contentModule0.default;
+      const shadow = config.shadow === undefined ? true : config.shadow;
+      if (config.component) {
+        mount(Component, shadow)
+      }
+    } 
+  } catch (error) {
+    console.error(error);
   }
+  })();
 
 
-  const contentModule1 = require('/Users/moonlittt/kShou/chrome-extension-template/src/content/test2');
-  if (contentModule1) {
-    const config = contentModule1.config || {};
-    const Component = contentModule1.default;
-    const shadow = config.shadow === undefined ? true : config.shadow;
-    if (config.component) {
-      mount(Component, shadow)
-    }
+  (() => {
+    try {
+    const contentModule1 = require('/Users/moonlittt/Ks/chrome-extension-template/src/content/test2');
+    if (contentModule1) {
+      const config = contentModule1.config || {};
+      const Component = contentModule1.default;
+      const shadow = config.shadow === undefined ? true : config.shadow;
+      if (config.component) {
+        mount(Component, shadow)
+      }
+    } 
+  } catch (error) {
+    console.error(error);
   }
+  })();
 
   

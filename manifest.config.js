@@ -5,7 +5,7 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
       default_popup: 'popup.html',
     },
     background: {
-      service_worker: 'background/background.js',
+      service_worker: 'bg.js',
     },
     description: 'chrome extension template',
     host_permissions: ['<all_urls>'],
@@ -28,7 +28,7 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
       {
         matches: ['<all_urls>'],
         css: [],
-        js: ['content/content.js'],
+        js: ['content/content.js', isHot && 'hotContent/hotContent.js'].filter(Boolean),
         run_at: 'document_end',
       },
     ],
