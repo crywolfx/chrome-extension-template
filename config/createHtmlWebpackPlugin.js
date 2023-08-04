@@ -29,6 +29,12 @@ const create = (config, isEnvProduction) => {
   )
 }
 
+const devtoolTemplate = Object.keys(entryInfo.devtoolsReallyEntry).map((chunkName) => ({
+  template: paths.devtoolsHtml,
+  chunks: [chunkName],
+  filename: `${chunkName}.html`
+}))
+
 const templates = [
   entryInfo.hasOptions && {
     template: paths.optionsHtml,
@@ -41,10 +47,10 @@ const templates = [
     filename: `popup.html`
   },
   entryInfo.hasDevTool && {
-    template: paths.devToolHtml,
-    chunks: ['devtool'],
-    filename: `devtool.html`
-  }
-].filter(Boolean)
+    chunks: ['devtoolsEntry'],
+    filename: `devtoolsEntry.html`
+  },
+  ...devtoolTemplate
+].filter(Boolean);
 
 module.exports = (isEnvProduction) => templates.map((tpl) => create(tpl, isEnvProduction))

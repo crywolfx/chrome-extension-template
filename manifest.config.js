@@ -1,18 +1,19 @@
-module.exports = function ({ version = '0.0.1', isProduction = false, isHot = false }) {
+module.exports = function ({ version = '0.0.1', isProduction = false, isHot = false, name = 'chrome-extension' }) {
   const enableInspectHeader = !isHot || isProduction;
   const config = {
     action: {
       default_popup: 'popup.html',
     },
     background: {
-      service_worker: 'bg.js',
+      service_worker: 'backgroundEntry.js',
     },
     description: 'chrome extension template',
     host_permissions: ['<all_urls>'],
     manifest_version: 3,
-    name: isProduction ? 'chrome-extension-template' : '[development]chrome-extension-template',
+    name: isProduction ? name : `[development]${name}`,
     offline_enabled: true,
     options_page: 'options.html',
+    devtools_page: "devtoolsEntry.html",
     permissions: [
       'tabs',
       'activeTab',
@@ -32,7 +33,7 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
         run_at: 'document_end',
       },
     ],
-    version: version,
+    version,
     web_accessible_resources: [
       {
         matches: ['<all_urls>'],

@@ -7,6 +7,7 @@ const hotLog = (msg: string ) => {
 };
 const ws = new WebSocket(`ws://${process.env.WDS_SOCKET_HOST}:${process.env.WDS_SOCKET_PORT}${process.env.WDS_SOCKET_PATH}`);
 const onMessage = async (data: any) => {
+  console.log(data);
   hotLog(`on message: ${data.data}`);
   let dataInfo: any = {};
   try {

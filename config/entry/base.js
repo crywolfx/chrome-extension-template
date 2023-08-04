@@ -1,7 +1,7 @@
 const fs = require('fs');
 const paths = require('../paths');
 
-const dataPaths = [paths.optionsSrc, paths.popupSrc, paths.devToolSrc, paths.backgroundSrc, paths.contentSrc]
+const dataPaths = [paths.optionsSrc, paths.popupSrc, paths.devtoolsSrc, paths.backgroundSrc, paths.contentSrc]
 
 const getEntry = (path) => {
   if (!fs.existsSync(path)) return [];
@@ -9,7 +9,7 @@ const getEntry = (path) => {
 };
 
 const [hasOptions, hasPopup, hasDevTool, hasBackground, hasContent] = dataPaths.map((p) => fs.existsSync(p));
-const [optionsEntry, popupEntry, devToolEntry, backgroundEntry, contentEntry] = dataPaths.map((p) => getEntry(p));
+const [optionsEntry, popupEntry, devtoolsEntry, backgroundEntry, contentEntry] = dataPaths.map((p) => getEntry(p));
 
 const entry = {
   hasOptions,
@@ -19,7 +19,7 @@ const entry = {
   hasContent,
   optionsEntry,
   popupEntry,
-  devToolEntry,
+  devtoolsEntry,
   backgroundEntry,
   contentEntry
 };

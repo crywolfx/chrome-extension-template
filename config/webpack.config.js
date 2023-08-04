@@ -25,7 +25,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const createEnvironmentHash = require('./webpack/persistentCache/createEnvironmentHash');
 const entryInfo = require('./entry');
 const createHtmlWebpackPlugin = require('./createHtmlWebpackPlugin');
-const packageVersion = require('../package.json').version;
+const packageConfig = require('../package.json');
 const WriteFilePlugin = require('./plugins/WriteFilePlugin');
 const manifestConfig = require('../manifest.config');
 const backgroundTplConfig = require('./background');
@@ -91,7 +91,7 @@ const hasJsxRuntime = (() => {
 const isFunction = (val) => Object.prototype.toString.call(val) === '[object Function]';
 
 const manifestConfigData = isFunction(manifestConfig)
-  ? manifestConfig({ version: packageVersion, isProduction, isHot })
+  ? manifestConfig({ version: packageConfig.version, isProduction, isHot, ...packageConfig.extension })
   : manifestConfig;
 const backgroundTpl = backgroundTplConfig(isHot);
 
@@ -630,10 +630,10 @@ module.exports = function (webpackEnv) {
       }),
       new WriteFilePlugin({
         outputFile: 'manifest.json',
-        content: JSON.stringify(manifestConfigData, null, 4),
+        content: JSON.stringify(manifestConfigData, null, 2),
       }),
       new WriteFilePlugin({
-        outputFile: 'bg.js',
+        outputFile: 'backgroundEntry.js',
         content: backgroundTpl,
       }),
     ].filter(Boolean),

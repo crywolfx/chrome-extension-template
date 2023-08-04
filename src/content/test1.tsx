@@ -6,7 +6,7 @@ export const config = {
 }
 
 const App = () => {
-  return <div className={style.test}>2023年08月03日21:26:56</div>
+  return <div className={style.test}>经典</div>
 }
 
 export default App

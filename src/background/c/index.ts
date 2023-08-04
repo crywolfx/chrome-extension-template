@@ -5,3 +5,5 @@ export default function a() {
 export const b = () => {
   return 456;
 }
+
+console.log("ccccccccc");
