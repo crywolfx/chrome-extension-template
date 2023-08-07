@@ -6,6 +6,12 @@ const hotLog = (msg: string ) => {
   console.log(`[chrome-hot-background]: ${msg}`);
 };
 const ws = new WebSocket(`ws://${process.env.WDS_SOCKET_HOST}:${process.env.WDS_SOCKET_PORT}${process.env.WDS_SOCKET_PATH}`);
+
+let lastActivedId: number | undefined;
+chrome.tabs.onActivated.addListener((activeInfo) => {
+  lastActivedId = activeInfo.tabId;
+})
+
 const onMessage = async (data: any) => {
   console.log(data);
   hotLog(`on message: ${data.data}`);
@@ -31,7 +37,7 @@ const onMessage = async (data: any) => {
       const tabInfo = await getTab({ active: true });
       await hotReloadEvent.emit('chromeHotReload', true, {
         type: 'tab',
-        id: tabInfo?.id,
+        id: tabInfo?.id || lastActivedId,
       });
     } catch (error: any) {
       hotLog(error?.message || 'message error');
