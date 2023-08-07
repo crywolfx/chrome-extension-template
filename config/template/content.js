@@ -1,5 +1,23 @@
+const createRender = (paths) => paths.map((item) => `
+  (() => {
+    try {
+    const contentModule = require('${item}');
+    if (contentModule) {
+      const config = contentModule.config || {};
+      const Component = contentModule.default;
+      const shadow = config.shadow === undefined ? true : config.shadow;
+      if (config.component) {
+        mount(Component, shadow)
+      }
+    } 
+  } catch (error) {
+    console.error(error);
+  }
+  })();
+`).join('\n')
 
-  
+const baseTpl = (stylePath) => {
+  return `
   import React from 'react';
   import ReactDOM from 'react-dom/client';
   const render = (props: any) => {
@@ -17,7 +35,7 @@
   };
   const mount = (Component: any, shadow: any) => {
     const styleEl = document.createElement('link')
-    const href = chrome.runtime.getURL('static/css/content/index.css');
+    const href = chrome.runtime.getURL('${stylePath}');
     styleEl.setAttribute('rel', 'stylesheet')
     styleEl.setAttribute('href', href);
     if (!shadow) {
@@ -35,39 +53,13 @@
       shadowRoot.append($container);
       document.documentElement.appendChild(shadowContainer);
     }
-  }
-  
-  (() => {
-    try {
-    const contentModule0 = require('/Users/moonlittt/Ks/chrome-extension-template/src/content/test1');
-    if (contentModule0) {
-      const config = contentModule0.config || {};
-      const Component = contentModule0.default;
-      const shadow = config.shadow === undefined ? true : config.shadow;
-      if (config.component) {
-        mount(Component, shadow)
-      }
-    } 
-  } catch (error) {
-    console.error(error);
-  }
-  })();
+  }`
+}
 
-
-  (() => {
-    try {
-    const contentModule1 = require('/Users/moonlittt/Ks/chrome-extension-template/src/content/test2');
-    if (contentModule1) {
-      const config = contentModule1.config || {};
-      const Component = contentModule1.default;
-      const shadow = config.shadow === undefined ? true : config.shadow;
-      if (config.component) {
-        mount(Component, shadow)
-      }
-    } 
-  } catch (error) {
-    console.error(error);
-  }
-  })();
-
-  
+module.exports = (path, stylePath) => {
+  const paths = Array.isArray(path) ? path : [path];
+  return paths.length ? `
+  ${baseTpl(stylePath)}
+  ${createRender(paths)}
+  ` : '';
+}

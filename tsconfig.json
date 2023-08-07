@@ -23,7 +23,6 @@
   },
   "include": [
     "src",
-    "config/content/files",
     "config/reload",
   ]
 }

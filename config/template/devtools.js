@@ -1,5 +1,10 @@
-const createFileName = (filename) => `devtool-${filename}`;
-const createRender = (paths) => paths.map((item, index) => `
+
+const createFileName = (path) => {
+  const filename = path.split('/').pop().split('.').shift();
+  return `devtool-${filename}`
+};
+
+const createRender = (paths) => paths.map((item) => `
 (() => {
   try {
     const devtoolModule = require('${item}');
@@ -7,7 +12,7 @@ const createRender = (paths) => paths.map((item, index) => `
       const config = devtoolModule.config || {};
       const panelName = config.name || '';
       const panelIcon = config.icon || '';
-      const fileName = '${createFileName(item.split('/').pop())}';
+      const fileName = '${createFileName(item)}';
       chrome.devtools.panels.create(
         panelName || fileName,
         panelIcon,

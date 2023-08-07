@@ -6,8 +6,7 @@ const {
   contentEntry,
   ...others
 } = require('./base');
-const { generateContentFile: contentGenerateContentFile } = require('../content/generate');
-const { generateContentFile: devToolGenerateContentFile, createFileName } = require('../devtool/generate');
+const { generateContent, generateDevtools, generateDevtoolsFileName } = require('../generate');
 const { resolveApp } = require('../paths');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -25,13 +24,12 @@ if (backgroundEntry.length) {
   entry.background = backgroundEntry
 }
 if (contentEntry.length) {
-  entry.content = contentGenerateContentFile(contentEntry)
+  entry.content = generateContent(contentEntry)
 }
 if (devtoolsEntry.length) {
-  entry.devtoolsEntry = devToolGenerateContentFile(devtoolsEntry);
+  entry.devtoolsEntry = generateDevtools(devtoolsEntry);
   devtoolsEntry.map((path) => {
-    const filename = path.split('/').pop().split('.').shift();;
-    devtoolsReallyEntry[`${createFileName(filename)}`] = path;  
+    devtoolsReallyEntry[`${generateDevtoolsFileName(path)}`] = path;
   });
   Object.assign(entry, devtoolsReallyEntry);
 }

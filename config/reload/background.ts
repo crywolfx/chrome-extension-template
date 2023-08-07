@@ -13,7 +13,6 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 })
 
 const onMessage = async (data: any) => {
-  console.log(data);
   hotLog(`on message: ${data.data}`);
   let dataInfo: any = {};
   try {
