@@ -3,5 +3,5 @@ export const config = {
 }
 
 const a = document.createElement('div');
-a.innerText = '输入测试2222222';
+a.innerText = '输入测试22221232132222222333fffff';
 document.body.appendChild(a);

@@ -8,6 +8,6 @@ module.exports = function (isHot = false) {
     }
   };
 `
-  const hotTpl = isHot && `tryImport('./hotBackground/hotBackground.js');` || '';
-  return `${baseTpl}${hotTpl}tryImport('./background/background.js');`
+  const hotTpl = isHot && `tryImport('./hotBackground/index.js');` || '';
+  return `${baseTpl}${hotTpl}tryImport('./background/index.js');`
 }

@@ -1,3 +1,4 @@
 export {};
-const c: number = 123;
-console.log(c);
+
+const a = 123;
+console.log(a * 3);

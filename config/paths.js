@@ -58,6 +58,7 @@ module.exports = {
   appBuild: resolveApp(buildPath),
   appPublic: resolveApp('public'),
   devtoolsHtml: resolveApp('config/template/devtools.html'),
+  devtoolsEntryHtml: resolveApp('config/template/devtoolsEntry.html'),
   optionsHtml: resolveApp('config/template/options.html'),
   popupHtml: resolveApp('config/template/popup.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),

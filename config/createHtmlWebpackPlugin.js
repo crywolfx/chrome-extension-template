@@ -47,6 +47,7 @@ const templates = [
     filename: `popup.html`
   },
   entryInfo.hasDevTool && {
+    template: paths.devtoolsEntryHtml,
     chunks: ['devtoolsEntry'],
     filename: `devtoolsEntry.html`
   },
