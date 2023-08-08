@@ -2,24 +2,34 @@ import { getTab } from 'chrome-extension-core';
 import { hotReloadEvent } from './event';
 
 let isReady = false;
-const hotLog = (msg: string ) => {
-  console.log(`[chrome-hot-background]: ${msg}`);
+const hotLog = (msg: string) => {
+  console.log(`\n`);
+  console.log(
+    '\x1b[33m%s\x1b[0m',
+    `**************[chrome-hot-background-msg]**************`
+  );
+  console.log('\x1b[33m%s\x1b[0m', new Date());
+  console.log('\x1b[32m%s\x1b[0m', msg);
+  console.log(
+    '\x1b[33m%s\x1b[0m',
+    `**************[chrome-hot-background-msg]**************`
+  );
 };
-const ws = new WebSocket(`ws://${process.env.WDS_SOCKET_HOST}:${process.env.WDS_SOCKET_PORT}${process.env.WDS_SOCKET_PATH}`);
+const ws = new WebSocket(
+  `ws://${process.env.WDS_SOCKET_HOST}:${process.env.WDS_SOCKET_PORT}${process.env.WDS_SOCKET_PATH}`
+);
 
 let lastActivedId: number | undefined;
 chrome.tabs.onActivated.addListener((activeInfo) => {
   lastActivedId = activeInfo.tabId;
-})
+});
 
 const onMessage = async (data: any) => {
   hotLog(`on message: ${data.data}`);
   let dataInfo: any = {};
   try {
-    dataInfo = JSON.parse(data.data); 
-  } catch (error) {
-    
-  }
+    dataInfo = JSON.parse(data.data);
+  } catch (error) {}
   if (
     dataInfo.type === 'ok' ||
     dataInfo.type === 'still-ok' ||
@@ -46,15 +56,15 @@ const onMessage = async (data: any) => {
       chrome.runtime?.reload?.();
     }
   }
-}
+};
 
 ws.onopen = () => {
   hotLog('connect open');
-}
+};
 ws.onmessage = onMessage;
 ws.onclose = () => {
   hotLog('connect closed');
-}
+};
 ws.onerror = () => {
   hotLog('connect error');
-}
+};
