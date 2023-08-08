@@ -1,4 +1,3 @@
 export {};
-
-const a = 123;
-console.log(a * 3);
+console.log(new Date());
+console.log(globalThis);

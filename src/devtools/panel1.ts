@@ -1,7 +1,7 @@
 export const config = {
-  name: 'panel-data22'
+  name: 'test panel'
 }
 
 const a = document.createElement('div');
-a.innerText = '输2入测试fffffff';
+a.innerText = '测试panel';
 document.body.appendChild(a);

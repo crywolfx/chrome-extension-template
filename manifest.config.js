@@ -13,7 +13,7 @@ module.exports = function ({ version = '0.0.1', isProduction = false, isHot = fa
     name: isProduction ? name : `[development]${name}`,
     offline_enabled: true,
     options_page: 'options.html',
-    // devtools_page: "devtoolsEntry.html",
+    devtools_page: "devtoolsEntry.html",
     permissions: [
       'tabs',
       'activeTab',

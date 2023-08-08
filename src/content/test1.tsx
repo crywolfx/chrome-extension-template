@@ -6,7 +6,7 @@ export const config = {
 }
 
 const App = () => {
-  return <div className={style.test}>123</div>
+  return <div className={style.test}>content-script</div>
 }
 
 export default App
