@@ -33,8 +33,7 @@ const onMessage = async (data: any) => {
   if (
     dataInfo.type === 'ok' ||
     dataInfo.type === 'still-ok' ||
-    dataInfo.type === 'warnings' ||
-    dataInfo.type === 'errors'
+    dataInfo.type === 'warnings'
   ) {
     if (!isReady) {
       hotLog(`first load`);
