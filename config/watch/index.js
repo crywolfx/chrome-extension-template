@@ -1,13 +1,15 @@
 const chokidar = require('chokidar');
 const debounce = require('lodash.debounce');
-const { contentSrc } = require('../paths');
-const { generateContent } = require('../generate');
+const { contentSrc, devtoolsSrc } = require('../paths');
+const { generateContent, generateDevtools } = require('../generate');
 const { getEntry } = require('../entry/base');
 
-const watchContent = () => {
-  const callback = () => generateContent(getEntry(contentSrc));
-  const debounceCallback = debounce(callback, 300)
-  chokidar.watch(contentSrc).on('add', debounceCallback).on('unlink', debounceCallback);
+
+const watch = (call, src, delay = 300) => {
+  const debounceCallback = debounce(call, delay);
+  chokidar.watch(src).on('add', debounceCallback).on('unlink', debounceCallback);
 }
 
-exports.watchContent = watchContent;
+exports.watchContent = () => watch(() => generateContent(getEntry(contentSrc)), contentSrc);
+
+exports.watchDevtool = () => watch(() => generateDevtools(getEntry(devtoolsSrc)), devtoolsSrc);

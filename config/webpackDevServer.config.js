@@ -5,7 +5,7 @@ const ignoredFiles = require('react-dev-utils/ignoredFiles');
 const redirectServedPath = require('react-dev-utils/redirectServedPathMiddleware');
 const paths = require('./paths');
 const getHttpsConfig = require('./getHttpsConfig');
-const { watchContent } = require('./watch');
+const { watchContent, watchDevtool } = require('./watch');
 
 const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
@@ -55,6 +55,7 @@ module.exports = function (proxy, allowedHost) {
     onBeforeSetupMiddleware(devServer) {
       devServer.app.use(evalSourceMapMiddleware(devServer));
       watchContent();
+      watchDevtool();
       if (fs.existsSync(paths.proxySetup)) {
         require(paths.proxySetup)(devServer.app);
       }
