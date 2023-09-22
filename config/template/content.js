@@ -6,8 +6,9 @@ const createRender = (paths) => paths.map((item) => `
       const config = contentModule.config || {};
       const Component = contentModule.default;
       const shadow = config.shadow === undefined ? true : config.shadow;
+      const root = config.root instanceof HTMLElement ? config.root : document.documentElement;
       if (config.component) {
-        mount(Component, shadow)
+        mount(root, Component, shadow)
       }
     } 
   } catch (error) {
@@ -33,7 +34,7 @@ const baseTpl = (stylePath) => {
       );
     }
   };
-  const mount = (Component: any, shadow: any) => {
+  const mount = (root = document.documentElement, Component: any, shadow: any) => {
     const styleEl = document.createElement('link')
     const href = chrome.runtime.getURL('${stylePath}');
     styleEl.setAttribute('rel', 'stylesheet')
@@ -41,7 +42,7 @@ const baseTpl = (stylePath) => {
     if (!shadow) {
       const $container = document.createElement('div');
       render({ container: $container, Component });
-      document.documentElement.appendChild($container);
+      root.appendChild($container);
       document.head.appendChild(styleEl);
     } else {
       const shadowContainer = document.createElement('div');
@@ -51,7 +52,7 @@ const baseTpl = (stylePath) => {
       render({ container: $container, Component });
       shadowRoot.append(styleEl);
       shadowRoot.append($container);
-      document.documentElement.appendChild(shadowContainer);
+      root.appendChild(shadowContainer);
     }
   }`
 }
