@@ -1,13 +1,11 @@
-import style from './test2.module.less';
-
 export const config = {
   component: true,
   shadow: true,
-}
-
+  root: document.querySelector('.directory'),
+};
 
 const App = () => {
-  return <div className={style.test}>www</div>
+  return <div>123213222221</div>
 }
 
 export default App

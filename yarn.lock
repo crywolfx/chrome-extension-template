@@ -3083,10 +3083,10 @@ chokidar@^3.4.2, chokidar@^3.5.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
-chrome-extension-core@^0.1.4:
-  version "0.1.4"
-  resolved "https://npm.corp.kuaishou.com/chrome-extension-core/-/chrome-extension-core-0.1.4.tgz"
-  integrity sha512-izpKNbFxn1sCGolWvG/J3nd2EpGLnfXuZ0PYEZzKcsc//bF0iCI0Z9wxpCpLbws76IhtTvWdvmaP1MGh/OlDdw==
+chrome-extension-core@^0.1.9-beta.0:
+  version "0.1.9-beta.0"
+  resolved "https://npm.corp.kuaishou.com/chrome-extension-core/-/chrome-extension-core-0.1.9-beta.0.tgz#05b578372c90d262a25f9f030d8072272138ec44"
+  integrity sha512-8FeRLoEgPbDeW8hIMe0Xq7Y1lPj+BQk9V8PBGmyqoUZgjulDjGSZZwRJnnvAAtfG0h+4+ru0MyeG2l2HGADzvA==
   dependencies:
     "@types/chrome" "^0.0.179"
 
