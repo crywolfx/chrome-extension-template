@@ -1,2 +1,3 @@
-console.log(new Date());
-console.log(globalThis);
+import { initRequest } from "./listener/request";
+
+initRequest();
