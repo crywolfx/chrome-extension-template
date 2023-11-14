@@ -1,3 +1,3 @@
-import { initRequest } from "./listener/request";
+import { initBackgroundLoginListener } from "@es/chrome-extension-sso";
 
-initRequest();
+initBackgroundLoginListener();
