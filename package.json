@@ -11,12 +11,13 @@
     "build": "node scripts/build.js"
   },
   "dependencies": {
-    "chrome-extension-core": "^0.1.9-beta.0",
+    "chrome-extension-core": "^0.2.2",
     "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.1",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "umi-request": "^1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

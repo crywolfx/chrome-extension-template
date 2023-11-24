@@ -57,7 +57,6 @@ if (process.env.HOST) {
   );
   console.log();
 }
-
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');

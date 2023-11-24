@@ -6,8 +6,9 @@ const {
   contentEntry,
   ...others
 } = require('./base');
-const { generateContent, generateDevtools, generateDevtoolsFileName } = require('../generate');
+const { generateContent, generateDevtools, generateEntry, generateDevtoolsFileName } = require('../generate');
 const { resolveApp } = require('../paths');
+generateEntry();
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isHot = process.env.HOT === 'true';
